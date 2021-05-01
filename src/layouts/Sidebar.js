@@ -20,7 +20,7 @@ const Sidebar = (props) => {
       collapsible
       collapsed={collapsed}
       onCollapse={() => setCollapsed(!collapsed)}
-      width={240}
+      width={220}
     >
       <div className="logo">
         <img src={logo} />
