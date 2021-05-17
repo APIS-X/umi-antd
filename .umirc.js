@@ -15,4 +15,7 @@ export default defineConfig({
   alias: {},
   routes,
   title,
+  alias: {
+    '@mock': resolve(__dirname, 'mock'),
+  },
 });

@@ -8,7 +8,7 @@ const {Option} = Select;
 const SearchForm = (props) => {
   const [form] = Form.useForm();
   const {
-    data: {dataTableList_E10 = []},
+    data: {dataSelectSheet_E10 = []},
   } = props;
   const initialValues = {
     tablenoE10: undefined,
@@ -23,8 +23,8 @@ const SearchForm = (props) => {
     <>
       <Form layout="inline" form={form} onFinish={onFinish} initialValues={initialValues}>
         <FormItem name="tablenoE10">
-          <Select placeholder="请选择E10表名称" style={{width: 300}}>
-            {dataTableList_E10.map((item) => {
+          <Select placeholder="请选择E10表名称" style={{width: 300}} showSearch>
+            {dataSelectSheet_E10.map((item) => {
               const {tablename, tableno} = item;
               return (
                 <Option key={tableno} value={tableno}>

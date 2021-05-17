@@ -5,115 +5,19 @@ import {message, Card, Button, Modal} from 'antd';
 import SearchForm from './components/SearchForm';
 import ModTableList from './components/ModTableList';
 import ModalDrawer from './components/ModalDrawer';
+
 import requests from '@/utils/request';
 import api from '@/api';
+import {dataList, dataSelectSheet_E10, dataSelectSheet_SAP} from '@mock';
 import styles from './index.less';
 
 class Main extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      dataList: [
-        {
-          tablenoE10: 'E10_a',
-          tablenameE10: '表E10_a',
-          tablenoSAP: 'SAP_a',
-          tablenameSAP: '表SAP_a',
-          column: [
-            {
-              columnnoE10: 'E10_a_A',
-              columnnameE10: '字段E10_a_A',
-              columnnoSAP: 'SAP_a_A',
-              columnnameSAP: '字段SAP_a_A',
-            },
-            {
-              columnnoE10: 'E10_a_B',
-              columnnameE10: '字段E10_a_B',
-              columnnoSAP: 'SAP_a_B',
-              columnnameSAP: '字段SAP_a_B',
-            },
-          ],
-        },
-        {
-          tablenoE10: 'E10_b',
-          tablenameE10: '表E10_b',
-          tablenoSAP: 'SAP_b',
-          tablenameSAP: '表SAP_b',
-          column: [
-            {
-              columnnoE10: 'E10_a_A',
-              columnnameE10: '字段E10_a_A',
-              columnnoSAP: 'SAP_a_A',
-              columnnameSAP: '字段SAP_a_A',
-            },
-            {
-              columnnoE10: 'E10_a_B',
-              columnnameE10: '字段E10_a_B',
-              columnnoSAP: 'SAP_a_B',
-              columnnameSAP: '字段SAP_a_B',
-            },
-          ],
-        },
-        {
-          tablenoE10: 'E10_c',
-          tablenameE10: '表E10_c',
-          tablenoSAP: 'SAP_c',
-          tablenameSAP: '表SAP_c',
-          column: [
-            {
-              columnnoE10: 'E10_a_A',
-              columnnameE10: '字段E10_a_A',
-              columnnoSAP: 'SAP_a_A',
-              columnnameSAP: '字段SAP_a_A',
-            },
-            {
-              columnnoE10: 'E10_a_B',
-              columnnameE10: '字段E10_a_B',
-              columnnoSAP: 'SAP_a_B',
-              columnnameSAP: '字段SAP_a_B',
-            },
-          ],
-        },
-        {
-          tablenoE10: 'E10_d',
-          tablenameE10: '表E10_d',
-          tablenoSAP: 'SAP_d',
-          tablenameSAP: '表SAP_d',
-          column: [
-            {
-              columnnoE10: 'E10_a_A',
-              columnnameE10: '字段E10_a_A',
-              columnnoSAP: 'SAP_a_A',
-              columnnameSAP: '字段SAP_a_A',
-            },
-            {
-              columnnoE10: 'E10_a_B',
-              columnnameE10: '字段E10_a_B',
-              columnnoSAP: 'SAP_a_B',
-              columnnameSAP: '字段SAP_a_B',
-            },
-          ],
-        },
-      ],
-      dataTableList_E10: [
-        {
-          tablename: 'E10表1',
-          tableno: 'E10_1',
-        },
-        {
-          tablename: 'E10表2',
-          tableno: 'E10_2',
-        },
-        {
-          tablename: 'E10表3',
-          tableno: 'E10_3',
-        },
-        {
-          tablename: 'E10表4',
-          tableno: 'E10_4',
-        },
-      ],
-      dataTableList_SAP: [],
+      dataList: dataList,
+      dataSelectSheet_E10: [],
+      dataSelectSheet_SAP: [],
       dataModal: {
         visible: false,
       },
@@ -124,20 +28,13 @@ class Main extends PureComponent {
     // 获取关联列表数据
     // this.getData(api.getTableInfo, 'dataList');
     // 获取E10列表
-    // this.getData(api.getTableList, 'dataTableList_E10', {tabletype: 1});
+    this.getData(api.getTableList, 'dataSelectSheet_E10', {tabletype: 1});
     // 获取SAP列表
-    // this.getData(api.getTableList, 'dataTableList_SAP', {tabletype: 2});
+    this.getData(api.getTableList, 'dataSelectSheet_SAP', {tabletype: 2});
   }
-  getData = async (url, fields, params, method) => {
-    const data = await requests(url, params, method);
-    this.setState({[fields]: data});
-  };
-
-  handleDelete = async (t) => {
-    const data = await requests(api.deleteTableInfo, t);
-    if (data) {
-      message.success('删除成功！');
-    }
+  getData = async (url, fields, data, method) => {
+    const res = await requests(url, {data}, method);
+    this.setState({[fields]: res});
   };
 
   handleFunc = async (type, params) => {
@@ -148,7 +45,10 @@ class Main extends PureComponent {
         this.setState({
           dataModal: {
             visible: true,
-            modalData: params,
+            modalData: {
+              status: type,
+              ...params,
+            },
           },
         });
         break;
@@ -161,8 +61,11 @@ class Main extends PureComponent {
           title: '确定删除当前关联关系吗?',
           okText: '确认',
           cancelText: '取消',
-          onOk() {
-            // handleDelete(t);
+          async onOk() {
+            // const data = await requests(api.deleteTableInfo, params);
+            // if (data) {
+            //   message.success('删除成功！');
+            // }
             message.success('删除成功！');
           },
         });
@@ -189,10 +92,10 @@ class Main extends PureComponent {
   };
 
   render() {
-    const {dataList, dataTableList_E10, dataModal} = this.state;
+    const {dataList, dataSelectSheet_E10, dataSelectSheet_SAP, dataModal} = this.state;
 
     const dataSearch = {
-      dataTableList_E10,
+      dataSelectSheet_E10,
     };
 
     return (
@@ -208,7 +111,12 @@ class Main extends PureComponent {
       >
         <SearchForm data={dataSearch} />
         <ModTableList dataSource={dataList} handleFunc={this.handleFunc} />
-        <ModalDrawer dataModal={dataModal} handleFunc={this.handleFunc} />
+        <ModalDrawer
+          dataModal={dataModal}
+          handleFunc={this.handleFunc}
+          dataSelectSheet_E10={dataSelectSheet_E10}
+          dataSelectSheet_SAP={dataSelectSheet_SAP}
+        />
       </Card>
     );
   }

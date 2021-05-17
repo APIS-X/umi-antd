@@ -1,3 +1,3 @@
-import {WalletOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
+import {WalletOutlined, ExclamationCircleOutlined, SwapOutlined} from '@ant-design/icons';
 
-export {WalletOutlined, ExclamationCircleOutlined};
+export {WalletOutlined, ExclamationCircleOutlined, SwapOutlined};

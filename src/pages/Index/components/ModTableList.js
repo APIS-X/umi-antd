@@ -1,46 +1,40 @@
 import React, {memo, PureComponent, useEffect} from 'react';
-import {message, Card, Select, Form, Button, Table, Cascader, Modal, Drawer} from 'antd';
-
-import {columns, itemColumns} from './columns';
+import {Button, Table} from 'antd';
 
 const ModTableList = memo((props) => {
   const {dataSource = [], handleFunc} = props;
 
-  // table添加操作列
-  useEffect(() => {
-    const columnsHandle = {
+  const columns = [
+    {
+      title: 'E10表名(说明)',
+      dataIndex: 'tablenoE10',
+      render: (t, r, index) => {
+        return `${t} (${r.tablenameE10})`;
+      },
+    },
+    {
+      title: '已关联SAP表名(说明)',
+      dataIndex: 'tablenoSAP',
+      render: (t, r, index) => {
+        return `${t} (${r.tablenameSAP})`;
+      },
+    },
+    {
       title: '操作',
       render: (t, r, index) => {
         return (
           <>
-            <Button type="link" onClick={() => handleFunc('UPDATE', t)}>
+            <Button type="link" onClick={() => handleFunc('UPDATE', r)}>
               修改
             </Button>
-            <Button type="link" onClick={() => handleFunc('DELETE', t)}>
+            <Button type="link" onClick={() => handleFunc('DELETE', r)}>
               删除
             </Button>
           </>
         );
       },
-    };
-    columns.push(columnsHandle);
-  }, []);
-
-  const expandedRowRender = (record, index, indent, expanded) => {
-    const itemSource = (record.column || []).map((item) => {
-      item.tablenoE10 = record.tablenoE10;
-      return item;
-    });
-    return (
-      <Table
-        rowKey="columnnoE10"
-        bordered={true}
-        dataSource={itemSource}
-        columns={itemColumns}
-        pagination={false}
-      />
-    );
-  };
+    },
+  ];
 
   return (
     <>
@@ -50,7 +44,6 @@ const ModTableList = memo((props) => {
         bordered={true}
         dataSource={dataSource}
         columns={columns}
-        // expandable={{expandedRowRender}}
         pagination={false}
       />
     </>
