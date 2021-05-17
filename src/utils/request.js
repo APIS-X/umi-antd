@@ -1,9 +1,13 @@
 import {request} from 'umi';
 import {message} from 'antd';
 
+import settings from '@/settings';
+
+const {apiPrefix} = settings;
+
 const requests = (url, options = {}, method = 'post') => {
   const defaultOptions = {
-    prefix: `http://rap2api.taobao.org/app/mock/282821/${method}/`,
+    prefix: `${apiPrefix}${method}/`,
     credentials: 'include',
     headers: {
       token: '',
@@ -23,7 +27,6 @@ const requests = (url, options = {}, method = 'post') => {
       message.warning(msg);
       return false;
     }
-    return data;
   });
 };
 
