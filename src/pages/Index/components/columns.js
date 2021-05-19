@@ -15,6 +15,7 @@ export const columns = [
     },
   },
 ];
+
 // 数据同步-已关联表-关联字段
 export const itemColumns = [
   {

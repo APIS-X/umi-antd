@@ -16,8 +16,6 @@ const requests = (url, options = {}, method = 'post') => {
 
   const params = {...defaultOptions, ...options, method, skipErrorHandler: true};
 
-  console.log('params', params);
-
   return request(url, params).then((response) => {
     const {status, msg, data} = response;
 

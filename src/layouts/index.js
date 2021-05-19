@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'umi';
 import {Layout} from 'antd';
 
+import {AuthRouter} from '@/components/Auth';
 import Sidebar from './Sidebar';
 import Breadcrumbs from './Breadcrumbs';
 
@@ -9,14 +10,18 @@ import styles from './index.less';
 
 const {Header, Content} = Layout;
 
-@connect(({global}) => {
+@connect(({app}) => {
   return {
-    global,
+    app,
   };
 })
 class LayoutBasic extends React.PureComponent {
   render() {
-    const {children} = this.props;
+    const {
+      location: {pathname},
+      children,
+    } = this.props;
+    console.log('location', location);
 
     return (
       <Layout>
@@ -26,7 +31,7 @@ class LayoutBasic extends React.PureComponent {
           <Content>
             <Breadcrumbs />
             <div className="container">
-              <>{children}</>
+              <AuthRouter path={pathname}>{children}</AuthRouter>
             </div>
           </Content>
         </Layout>

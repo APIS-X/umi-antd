@@ -12,7 +12,6 @@ export default defineConfig({
     type: 'none',
   },
   fastRefresh: {},
-  alias: {},
   routes,
   title,
   alias: {
