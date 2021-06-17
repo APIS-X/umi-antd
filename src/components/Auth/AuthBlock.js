@@ -1,7 +1,3 @@
-/**
- * Description: 功能权限组件
- * Author: APIS
- */
 import React, {useEffect, useState} from 'react';
 import {connect} from 'dva';
 import _ from 'lodash';
