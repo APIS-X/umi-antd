@@ -3,6 +3,7 @@ import {Link} from 'umi';
 import {Layout, Menu} from 'antd';
 
 import settings from '@/settings';
+import {regUrl} from '@/constants/reg';
 import * as icons from '@/constants/icons';
 
 import logo from '@/assets/images/logo.png';
@@ -10,110 +11,133 @@ import logo from '@/assets/images/logo.png';
 const {Sider} = Layout;
 const {SubMenu, Item: MenuItem} = Menu;
 
-const {title} = settings;
+const {title, sidebarWidth = 220} = settings;
 
 const dataMenus = [
   {
     label: 'Navigation One',
+    code: '',
     icon: 'MailOutlined',
     children: [
       {
         label: 'Option 1',
+        code: '',
         url: 'http://www.baidu.com',
+        children: [
+          {
+            label: 'Option 2',
+            code: '',
+            url: 'http://www.baidu.com',
+          },
+        ],
       },
       {
         label: 'Option 2',
+        code: '',
         url: 'http://www.baidu.com',
       },
       {
         label: 'Option 3',
+        code: '',
         url: 'http://www.baidu.com',
       },
     ],
   },
   {
     label: 'Navigation Two',
+    code: '',
     icon: 'AppstoreOutlined',
     children: [
       {
         label: 'Option 1',
+        code: '',
         url: 'http://www.baidu.com',
       },
       {
         label: 'Option 2',
+        code: '',
         url: 'http://www.baidu.com',
       },
       {
         label: 'Option 3',
+        code: '',
         url: 'http://www.baidu.com',
       },
     ],
   },
   {
     label: 'Navigation Three',
+    code: '',
     icon: 'SettingOutlined',
     children: [
       {
         label: 'Option 1',
+        code: '',
         url: 'http://www.baidu.com',
       },
       {
         label: 'Option 2',
+        code: '',
         url: 'http://www.baidu.com',
       },
       {
         label: 'Option 3',
+        code: '',
         url: 'http://www.baidu.com',
       },
     ],
   },
 ];
 
+const renderMenus = (menus) => {
+  const getItemMenu = (menu = [], index = [0]) => {
+    return menu.map(({label, code, type, icon, url = '', children = []}, i) => {
+      const IconMenu = icons[icon];
+      const key = code || `${index.join('_')}_${i}`;
+      if (children.length) {
+        return (
+          <SubMenu key={key} icon={icon && <IconMenu />} title={label}>
+            <>{getItemMenu(children, [...index, i])}</>
+          </SubMenu>
+        );
+      } else {
+        return (
+          <MenuItem key={key}>
+            {regUrl.test(url) ? (
+              <a href={url} target="_blank">
+                {label}
+              </a>
+            ) : (
+              <Link to={url}>{label}</Link>
+            )}
+          </MenuItem>
+        );
+      }
+    });
+  };
+
+  const itemMenu = getItemMenu(menus);
+  return itemMenu;
+};
+
 const Sidebar = (props) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [openKeys, setOpenKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([]);
 
   return (
     <Sider
       collapsible
       collapsed={collapsed}
       onCollapse={() => setCollapsed(!collapsed)}
-      width={220}
+      width={sidebarWidth}
     >
       <div className="logo">
         <img src={logo} />
         <span>{title}</span>
       </div>
-      <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline">
-        {/* {
-          dataMenus.map(pItem=> {
-            <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-          <MenuItem key="1">Option 1</MenuItem>
-          <MenuItem key="2">Option 2</MenuItem>
-          <MenuItem key="3">Option 3</MenuItem>
-          <MenuItem key="4">Option 4</MenuItem>
-        </SubMenu>
-          })
-        } */}
-        <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-          <MenuItem key="1">Option 1</MenuItem>
-          <MenuItem key="2">Option 2</MenuItem>
-          <MenuItem key="3">Option 3</MenuItem>
-          <MenuItem key="4">Option 4</MenuItem>
-        </SubMenu>
-        <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-          <MenuItem key="5">Option 5</MenuItem>
-          <MenuItem key="6">Option 6</MenuItem>
-          <SubMenu key="sub3" title="Submenu">
-            <MenuItem key="7">Option 7</MenuItem>
-            <MenuItem key="8">Option 8</MenuItem>
-          </SubMenu>
-        </SubMenu>
-        <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-          <MenuItem key="9">Option 9</MenuItem>
-          <MenuItem key="10">Option 10</MenuItem>
-          <MenuItem key="11">Option 11</MenuItem>
-          <MenuItem key="12">Option 12</MenuItem>
-        </SubMenu>
+      <Menu defaultSelectedKeys={[]} defaultOpenKeys={[]} mode="inline">
+        {renderMenus(dataMenus)}
       </Menu>
     </Sider>
   );

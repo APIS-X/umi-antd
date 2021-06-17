@@ -21,7 +21,6 @@ class LayoutBasic extends React.PureComponent {
       location: {pathname},
       children,
     } = this.props;
-    console.log('location', location);
 
     return (
       <Layout>

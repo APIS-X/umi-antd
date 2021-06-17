@@ -1,6 +1,6 @@
 ## 项目说明
 
-umi-antd 是采用umi + antd构建的一套SAP中后台框架。
+umi-antd 采用umi + antd构建，适用于SAP中后台项目。
 
 ## 项目构建
 
