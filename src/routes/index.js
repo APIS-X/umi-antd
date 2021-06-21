@@ -7,6 +7,7 @@ const getRoutes = (routes, maps = {}) => {
     }
     if (item.routes) {
       item.routes = getRoutes(item.routes, maps).routes;
+      item.children = item.routes;
     }
     return item;
   });

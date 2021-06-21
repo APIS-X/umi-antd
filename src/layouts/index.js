@@ -20,11 +20,12 @@ class LayoutBasic extends React.PureComponent {
     const {
       location: {pathname},
       children,
+      app: {dataMenus = []},
     } = this.props;
 
     return (
       <Layout>
-        <Sidebar />
+        <Sidebar dataMenus={dataMenus} />
         <Layout>
           <Header />
           <Content>

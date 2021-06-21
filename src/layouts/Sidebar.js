@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'umi';
 import {Layout, Menu} from 'antd';
 
-import settings from '@/settings';
 import {regUrl} from '@/constants/reg';
 import * as icons from '@/constants/icons';
+import settings from '@/settings';
+import {getMenuTransform} from '@/utils/index';
 
 import logo from '@/assets/images/logo.png';
 
@@ -13,102 +14,27 @@ const {SubMenu, Item: MenuItem} = Menu;
 
 const {title, sidebarWidth = 220} = settings;
 
-const dataMenus = [
-  {
-    label: 'Navigation One',
-    code: '',
-    icon: 'MailOutlined',
-    children: [
-      {
-        label: 'Option 1',
-        code: '',
-        url: 'http://www.baidu.com',
-        children: [
-          {
-            label: 'Option 2',
-            code: '',
-            url: 'http://www.baidu.com',
-          },
-        ],
-      },
-      {
-        label: 'Option 2',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-      {
-        label: 'Option 3',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-    ],
-  },
-  {
-    label: 'Navigation Two',
-    code: '',
-    icon: 'AppstoreOutlined',
-    children: [
-      {
-        label: 'Option 1',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-      {
-        label: 'Option 2',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-      {
-        label: 'Option 3',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-    ],
-  },
-  {
-    label: 'Navigation Three',
-    code: '',
-    icon: 'SettingOutlined',
-    children: [
-      {
-        label: 'Option 1',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-      {
-        label: 'Option 2',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-      {
-        label: 'Option 3',
-        code: '',
-        url: 'http://www.baidu.com',
-      },
-    ],
-  },
-];
-
-const renderMenus = (menus) => {
+// 拼装菜单Dom
+const renderMenus = (menus = []) => {
   const getItemMenu = (menu = [], index = [0]) => {
-    return menu.map(({label, code, type, icon, url = '', children = []}, i) => {
+    return menu.map(({name, code, type, icon, url = '', children = []}, i) => {
       const IconMenu = icons[icon];
-      const key = code || `${index.join('_')}_${i}`;
+      const key = code;
       if (children.length) {
         return (
-          <SubMenu key={key} icon={icon && <IconMenu />} title={label}>
+          <SubMenu key={key} icon={icon && <IconMenu />} title={name}>
             <>{getItemMenu(children, [...index, i])}</>
           </SubMenu>
         );
       } else {
         return (
-          <MenuItem key={key}>
+          <MenuItem key={key} icon={icon && <IconMenu />}>
             {regUrl.test(url) ? (
               <a href={url} target="_blank">
-                {label}
+                {name}
               </a>
             ) : (
-              <Link to={url}>{label}</Link>
+              <Link to={url}>{name}</Link>
             )}
           </MenuItem>
         );
@@ -120,10 +46,25 @@ const renderMenus = (menus) => {
   return itemMenu;
 };
 
-const Sidebar = (props) => {
+const Sidebar = ({dataMenus = []}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [openKeys, setOpenKeys] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
+
+  useEffect(() => {
+    const path = location.pathname;
+    const {menuMaps} = getMenuTransform(dataMenus);
+    const openKeys = menuMaps[path] ? menuMaps[path].slice(0, -1) : [];
+    const selectedKeys = menuMaps[path] ? menuMaps[path].slice(-1) : [];
+
+    setOpenKeys(openKeys);
+    setSelectedKeys(selectedKeys);
+  }, [location.pathname]);
+
+  const onOpenChange = (openKeys) => {
+    openKeys = openKeys.length > 1 ? openKeys.slice(-1) : openKeys;
+    setOpenKeys(openKeys);
+  };
 
   return (
     <Sider
@@ -132,14 +73,20 @@ const Sidebar = (props) => {
       onCollapse={() => setCollapsed(!collapsed)}
       width={sidebarWidth}
     >
-      <div className="logo">
+      <a className="logo" href="/">
         <img src={logo} />
         <span>{title}</span>
-      </div>
-      <Menu defaultSelectedKeys={[]} defaultOpenKeys={[]} mode="inline">
+      </a>
+      <Menu
+        theme="dark"
+        mode="inline"
+        openKeys={openKeys}
+        selectedKeys={selectedKeys}
+        onOpenChange={onOpenChange}
+      >
         {renderMenus(dataMenus)}
       </Menu>
     </Sider>
   );
 };
-export default React.memo(Sidebar);
+export default Sidebar;
