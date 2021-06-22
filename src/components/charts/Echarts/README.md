@@ -53,6 +53,7 @@
 
   | 参数                   | 类型                       | 默认值    | 必填 | 所属组件              | 说明                     |
   | ---------------------- | -------------------------- | --------- | ---- | --------------------- | ------------------------ |
+  |color|Array|\[\]|否| |组件颜色，同echarts|
   | pie_radius             | Array \| String            | ’60%‘     | 否   | Pie                   | 定义饼图或者圆环的半径   |
   | axial_stack            | Boolean                    | true      | 否   | Line \| Bar           | 数据是否堆叠，默认堆叠   |
   | axial_legendType       | String                     | 'default' | 否   | 'default' \| 'custom' | 图例是否使用自定义       |
