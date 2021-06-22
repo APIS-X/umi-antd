@@ -19,6 +19,7 @@ umi-antd 采用 umi + antd 构建，适用于 SAP 中后台项目。
 
 ## 项目结构
 
+```
 ├── README.md
 ├── dist 打包文件夹
 ├── mock 数据 mock 目录
@@ -26,7 +27,7 @@ umi-antd 采用 umi + antd 构建，适用于 SAP 中后台项目。
 ├── package.json
 ├── src 源码目录
 │   ├── api api
-│   ├── app.js  
+│   ├── app.js
 │   ├── assets 静态资源
 │   │   └── images
 │   ├── components 通用功能组件
@@ -61,3 +62,4 @@ umi-antd 采用 umi + antd 构建，适用于 SAP 中后台项目。
 ├── tsconfig.json
 ├── typings.d.ts
 └── yarn.lock
+```
