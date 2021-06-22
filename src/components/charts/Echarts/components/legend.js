@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatThousandth} from '@/utils';
+import {formatThousandth} from '@/utils/tool';
 
 const Legend = (props) => {
   const {title = '', data = [], color = [], type = []} = props;

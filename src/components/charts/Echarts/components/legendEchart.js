@@ -4,7 +4,7 @@ import ReactEchart from '../reactEchart';
 import Legend from './legend';
 
 import {getOptions} from '../utils';
-import {formatThousandth} from '@/utils';
+import {formatThousandth} from '@/utils/tool';
 
 const Template = (props) => {
   const {

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {formatThousandth} from '@/utils';
 
-import {yAxis, splitNumber, shadowStyle, colorAxis} from './config';
+import {yAxis, splitNumber, shadowStyle, colorAxis, colorPie} from './config';
 import {optionMapsEffectScatter, dataProvinceMaps} from './maps/config';
 
 /**
@@ -315,12 +315,15 @@ export const getOptions = ({
         data = data || {};
 
         const {value = []} = data;
-        const {pie_radius} = extra;
+        const {pie_radius, color = []} = extra;
 
         // series
         const dataSeries = value
-          .map((item) => {
+          .map((item, index) => {
             const {name, ratio, count} = item;
+            const itemStyle = {
+              color: color.length ? color[index] : colorPie[index],
+            };
             return {
               name,
               value: count.replace(/,/g, ''),
@@ -328,6 +331,17 @@ export const getOptions = ({
                 formatter: function (params) {
                   return ['{c|\n}', `{a|${name}}`, `{b|${count} | ${ratio}}`, '{c|\n}'].join('\n');
                 },
+              },
+              tooltip: {
+                formatter: function (params) {
+                  const {marker} = params;
+                  const result = `${marker}&nbsp;&nbsp;${name}</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${count} | ${ratio}`;
+                  return result;
+                },
+              },
+              itemStyle,
+              emphasis: {
+                itemStyle,
               },
             };
           })
