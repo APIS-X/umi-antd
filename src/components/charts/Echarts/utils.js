@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {formatThousandth} from '@/utils';
+import {formatThousandth} from '@/utils/tool';
 
 import {yAxis, splitNumber, shadowStyle, colorAxis, colorPie} from './config';
 import {optionMapsEffectScatter, dataProvinceMaps} from './maps/config';

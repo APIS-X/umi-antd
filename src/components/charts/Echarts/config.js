@@ -41,3 +41,5 @@ export const axisPointer = {
     size: 0,
   },
 };
+
+export const colorPie = ['#2656F0', '#466FF2', '#7291F5', '#9DB3F8', '#9DB3F8', '#C9D5FB'];
