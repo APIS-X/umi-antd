@@ -1,0 +1,19 @@
+.disabled {
+  cursor: not-allowed;
+  & > a,
+  & > li {
+    pointer-events: none;
+    color: #bbb;
+  }
+  & > button {
+    color: #bbb;
+    background: #f5f5f5;
+    border-color: #d9d9d9;
+    pointer-events: none;
+    text-shadow: none;
+    box-shadow: none;
+    span {
+      pointer-events: none;
+    }
+  }
+}
