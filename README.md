@@ -29,7 +29,7 @@ umi-antd 采用 umi + antd 构建，适用于 SAP 中后台项目。
 │   ├── api api
 │   ├── app.js
 │   ├── assets 静态资源
-│   │   └── images
+│   │   └── images
 │   ├── components 通用功能组件
 │   │   ├── Auth 权限组件
 │   │   ├── Message 预留公共弹窗等组件二次封装

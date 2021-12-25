@@ -17,7 +17,7 @@ import ReactEchart from '../reactEchart';
 import {optionDefault} from './config';
 import {getOptions} from '../utils';
 
-import chinaJson from './china';
+import JsonMap from '@/components/charts/data/json/china.json';
 
 echarts.use([
   MapChart,
@@ -34,7 +34,7 @@ echarts.use([
   CanvasRenderer,
 ]);
 // 地图数据注入
-echarts.registerMap('china', chinaJson);
+echarts.registerMap('chartsMap', JsonMap);
 
 const Template = (props) => {
   const {

@@ -26,8 +26,14 @@ export default [
           {
             name: 'Echarts',
             path: '/charts/echarts',
-            component: '@/pages/Charts/Echarts',
-            auth: '',
+            routes: [
+              {
+                name: 'Echarts-Map',
+                path: '/charts/echarts/map',
+                component: '@/pages/charts/echarts/index',
+                auth: '',
+              },
+            ],
           },
         ],
       },
@@ -45,6 +51,18 @@ export default [
             name: 'TableCard',
             path: '/table/card',
             component: '@/pages/Table/TableCard',
+            auth: '',
+          },
+        ],
+      },
+      {
+        name: '可视化',
+        path: '/visual',
+        routes: [
+          {
+            name: 'VisualDetail',
+            path: '/visual/detail',
+            component: '@/pages/visual/Index',
             auth: '',
           },
         ],

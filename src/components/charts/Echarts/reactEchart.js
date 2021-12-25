@@ -49,7 +49,7 @@ const ReactEchart = (props) => {
         break;
       }
       case 'map': {
-        if (!option.series[0].data.length) {
+        if (!option.series[0].data || (option.series[0].data && !option.series[0].data.length)) {
           noData = true;
         }
         break;

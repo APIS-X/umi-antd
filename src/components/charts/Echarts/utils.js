@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {formatThousandth} from '@/utils/tool';
 
 import {yAxis, splitNumber, shadowStyle, colorAxis, colorPie} from './config';
-import {optionMapsEffectScatter, dataProvinceMaps} from './maps/config';
+import {optionMapsEffectScatter} from './maps/config';
 
 /**
  * 数据类型判断
@@ -409,6 +409,7 @@ export const getOptions = ({
         break;
       }
       case 'map': {
+        data = data || {};
         let {name, data: dataArea} = data;
         dataArea = dataArea || [];
         let seriesMapData = [];
@@ -425,14 +426,6 @@ export const getOptions = ({
             name,
             value,
           });
-          if (dataProvinceMaps[name]) {
-            seriesEffectScatterData.push({
-              name,
-              value: [...dataProvinceMaps[name].value, value],
-              ...others,
-              visualMap: false,
-            });
-          }
         }
 
         temps = {
@@ -440,7 +433,7 @@ export const getOptions = ({
             formatter: function (params) {
               const {name, value} = params;
               const showValue = Array.isArray(value) ? value[2] : value;
-              const result = `${name}&nbsp;&nbsp;${showValue ? `${showValue}%` : '0.0%'}`;
+              const result = `${name}&nbsp;&nbsp;${showValue ? `${showValue}` : '-'}`;
               return result;
             },
           },

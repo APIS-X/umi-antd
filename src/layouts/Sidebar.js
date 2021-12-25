@@ -47,7 +47,9 @@ const renderMenus = (menus = []) => {
 };
 
 const Sidebar = ({dataMenus = []}) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    window.localStorage.getItem('collapsed') === 'true' || false,
+  );
   const [openKeys, setOpenKeys] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
 
@@ -61,8 +63,12 @@ const Sidebar = ({dataMenus = []}) => {
     setSelectedKeys(selectedKeys);
   }, [location.pathname]);
 
+  useEffect(() => {
+    window.localStorage.setItem('collapsed', collapsed);
+  }, [collapsed]);
+
   const onOpenChange = (openKeys) => {
-    openKeys = openKeys.length > 1 ? openKeys.slice(-1) : openKeys;
+    // openKeys = openKeys.length > 1 ? openKeys.slice(-1) : openKeys;
     setOpenKeys(openKeys);
   };
 

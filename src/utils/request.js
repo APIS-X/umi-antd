@@ -1,13 +1,15 @@
 import {request} from 'umi';
 import {message} from 'antd';
 
+import {regUrl} from '@/constants/reg';
 import settings from '@/settings';
 
 const {apiPrefix} = settings;
 
 const requests = (url, options = {}, method = 'post') => {
+  const hasApiPrefix = regUrl.test(url);
   const defaultOptions = {
-    prefix: `${apiPrefix}${method}/`,
+    prefix: `${hasApiPrefix ? '' : apiPrefix}${method}/`,
     credentials: 'include',
     headers: {
       token: '',

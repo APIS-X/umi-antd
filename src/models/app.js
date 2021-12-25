@@ -24,7 +24,14 @@ export default {
             name: 'Echarts',
             code: 'CHARTS_ECHARTS',
             type: 'menu',
-            url: '/charts/echarts',
+            children: [
+              {
+                name: 'Map',
+                code: 'CHARTS_ECHARTS_MAP',
+                type: 'menu',
+                url: '/charts/echarts/map',
+              },
+            ],
           },
         ],
       },
