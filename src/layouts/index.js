@@ -3,10 +3,11 @@ import {connect} from 'umi';
 import {Layout} from 'antd';
 
 import {AuthRouter} from '@/components/Auth';
+import {listRouterBlank} from '@/settings';
 import Sidebar from './Sidebar';
 import Breadcrumbs from './Breadcrumbs';
 
-import styles from './index.less';
+import './index.less';
 
 const {Header, Content} = Layout;
 
@@ -22,21 +23,32 @@ class LayoutBasic extends React.PureComponent {
       children,
       app: {dataMenus = []},
     } = this.props;
+    let renderPage = null;
 
-    return (
-      <Layout>
-        <Sidebar dataMenus={dataMenus} />
+    if (listRouterBlank.includes(pathname)) {
+      renderPage = (
         <Layout>
-          <Header />
-          <Content>
-            <Breadcrumbs />
-            <div className="container">
-              <AuthRouter path={pathname}>{children}</AuthRouter>
-            </div>
-          </Content>
+          <AuthRouter path={pathname}>{children}</AuthRouter>
         </Layout>
-      </Layout>
-    );
+      );
+    } else {
+      renderPage = (
+        <Layout>
+          <Sidebar dataMenus={dataMenus} />
+          <Layout>
+            <Header />
+            <Content>
+              <Breadcrumbs />
+              <div className="container">
+                <AuthRouter path={pathname}>{children}</AuthRouter>
+              </div>
+            </Content>
+          </Layout>
+        </Layout>
+      );
+    }
+
+    return renderPage;
   }
 }
 
