@@ -26,3 +26,17 @@ export const getUniqueId = (arr = [], n = 8, comb = '123456789') => {
 export const formatThousandth = (data) => {
   return data && (data + '').replace(/,/gi, '').replace(/(?!^)(?=(\d{3})+($|\.))/g, ',');
 };
+
+/**
+ * 将数组转换为以指定字段为key的对象
+ * @param {Array} arr (将要转换的数组)
+ * @param {String} key (以哪个字段作为对象的key)
+ */
+export const arrayToObj = (arr = [], key = 'id') => {
+  const params = {};
+  for (let i = 0, len = arr.length; i < len; i++) {
+    const item = arr[i];
+    params[item[key]] = item;
+  }
+  return params;
+};

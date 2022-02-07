@@ -9,13 +9,6 @@
   }
   .v-units,
   .v-editor {
-    &.ant-layout-sider-has-trigger {
-      padding-bottom: 36px;
-      .ant-layout-sider-trigger {
-        height: 36px;
-        line-height: 36px;
-      }
-    }
     .anticon,
     .trigger {
       cursor: pointer;
@@ -38,6 +31,40 @@
         overflow-x: hidden;
         overflow-y: overlay;
         padding: 0;
+      }
+      .unit-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        li {
+          width: 40%;
+          padding: 10px;
+          text-align: center;
+          background: #f7f8fa;
+          border-radius: 2px;
+          transition: all 0.4s;
+          &:hover {
+            background: #1890ff;
+            color: #fff;
+            cursor: e-resize;
+            .anticon {
+              color: #fff;
+              cursor: e-resize;
+            }
+          }
+          .anticon {
+            font-size: 24px;
+            color: #1890ff;
+            transition: all 0.4s;
+          }
+          p {
+            margin: 0;
+          }
+        }
       }
     }
     .ant-collapse {

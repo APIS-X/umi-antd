@@ -9,13 +9,29 @@ export const visualUnitList = [
     label: '表单组件',
     key: 'Form',
     icon: 'FormOutlined',
-    children: [],
+    children: [
+      {
+        label: 'Text',
+        key: 'Text',
+        icon: 'FontSizeOutlined',
+      },
+      {
+        label: 'Button',
+        key: 'Button',
+        icon: 'PicCenterOutlined',
+      },
+    ],
   },
   {
     label: '列表组件',
     key: 'List',
     icon: 'OrderedListOutlined',
-    children: [],
+    children: [
+      {
+        label: '数据摘要',
+        key: '',
+      },
+    ],
   },
   {
     label: '图表组件',
