@@ -50,6 +50,11 @@ export const gridDefaults = {
   rowHeight: 100,
   margin: [5, 5],
   containerPadding: [0, 0],
+  droppingItem: {
+    w: 4,
+    h: 1,
+    i: 'abc',
+  },
 };
 
 export default {

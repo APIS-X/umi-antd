@@ -20,8 +20,6 @@ const Template = () => {
         y: 0,
         i: '1',
         moved: false,
-        static: false,
-        resizeHandles: ['s', 'e', 'se'],
       },
     },
     {
@@ -33,7 +31,6 @@ const Template = () => {
         y: 0,
         i: '2',
         moved: false,
-        static: false,
       },
     },
     {
@@ -45,7 +42,6 @@ const Template = () => {
         y: 0,
         i: '3',
         moved: false,
-        static: false,
       },
     },
     {
@@ -57,7 +53,6 @@ const Template = () => {
         y: 2,
         i: '4',
         moved: false,
-        static: false,
       },
     },
     {
@@ -69,7 +64,6 @@ const Template = () => {
         y: 1,
         i: '5',
         moved: false,
-        static: false,
       },
     },
     {
@@ -81,7 +75,6 @@ const Template = () => {
         y: 1,
         i: '6',
         moved: false,
-        static: false,
       },
     },
     {
@@ -93,7 +86,6 @@ const Template = () => {
         y: 2,
         i: '7',
         moved: false,
-        static: false,
       },
     },
     {
@@ -105,7 +97,6 @@ const Template = () => {
         y: 2,
         i: '8',
         moved: false,
-        static: false,
       },
     },
   ]);

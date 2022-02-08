@@ -25,6 +25,7 @@ const Template = (props) => {
   const [init, setInit] = useState(false);
   const [options, setOptions] = useState(defaults || gridDefaults);
   const [dataColumns, setDataColumns] = useState(data);
+  const [currentLayout, setCurrentLayout] = useState([]);
 
   const setModGridSize = () => {
     const clientWidth = refWrapGrid.current.clientWidth - 12; // 12为盒子左右的padding值
@@ -45,6 +46,7 @@ const Template = (props) => {
 
   const onLayoutChange = (layout) => {
     console.log('layout', layout);
+    setCurrentLayout(layout);
 
     // this.props.onLayoutChange(layout);
     // this.setState({layout: layout});
@@ -59,6 +61,22 @@ const Template = (props) => {
   const onDrop = (layout, layoutItem, _event) => {
     // setDataColumns()
     console.log('layoutItem', layout, layoutItem, _event);
+    const temps = currentLayout.map(({i, w, h, x, y}, index) => {
+      const isDrop = i === '__dropping-elem__';
+      const id = isDrop ? `drop_${i}` : i + '';
+      return {
+        id,
+        layouts: {
+          w: w,
+          h,
+          x,
+          y,
+          i,
+          moved: false,
+        },
+      };
+    });
+    setDataColumns(temps);
   };
 
   const onRemoveItem = (i) => {
@@ -67,9 +85,12 @@ const Template = (props) => {
   };
 
   const generateDOM = () => {
+    console.log('dataCol', dataColumns);
     return dataColumns.map(({id, layouts}) => {
+      const {i, w, h, x, y} = layouts;
+      console.log('id', id);
       return (
-        <div key={id} data-grid={layouts}>
+        <div key={`${i}_${w}_${h}_${x}_${y}`} data-grid={layouts}>
           <span className="text">{id}</span>
           {/* <span className="remove" style={styleBtnRemove} onClick={() => onRemoveItem(i)}>
                 x
