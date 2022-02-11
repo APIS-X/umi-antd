@@ -1,30 +1,20 @@
 import {memo, useState, useEffect} from 'react';
-import {Button, Space} from 'antd';
-import {
-  AppstoreAddOutlined,
-  DatabaseOutlined,
-  DesktopOutlined,
-  SaveOutlined,
-  FileProtectOutlined,
-} from '@ant-design/icons';
+import {Layout, Button, Space} from 'antd';
+import {DesktopOutlined, SaveOutlined, FileProtectOutlined} from '@ant-design/icons';
+
+const {Header} = Layout;
 
 const Template = () => {
   return (
     <div className="v-handler">
       <Space>
-        <Button type="link" size="large" icon={<DatabaseOutlined />}>
-          基础信息
-        </Button>
-        <Button type="link" size="large" icon={<AppstoreAddOutlined />}>
-          新增模块
-        </Button>
-        <Button type="link" size="large" icon={<DesktopOutlined />}>
+        <Button type="link" icon={<DesktopOutlined />}>
           预览
         </Button>
-        <Button type="link" size="large" icon={<SaveOutlined />}>
+        <Button type="link" icon={<SaveOutlined />}>
           保存
         </Button>
-        <Button type="link" size="large" icon={<FileProtectOutlined />}>
+        <Button type="link" icon={<FileProtectOutlined />}>
           发布
         </Button>
       </Space>

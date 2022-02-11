@@ -2,7 +2,7 @@ export const visualUnitList = [
   {
     label: '容器组件',
     key: 'Container',
-    icon: 'LayoutOutlined',
+    icon: 'BorderOutlined',
     children: [],
   },
   {

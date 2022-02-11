@@ -1,123 +1,64 @@
-.mod-visual {
-  .ant-layout-header {
-    .logo {
-      margin-left: -40px;
-      img {
-        height: 80%;
-      }
-    }
+.v-layout {
+  height: 100vh;
+  .ant-layout-header,
+  .ant-layout-sider {
+    background: transparent;
   }
-  .v-units,
-  .v-editor {
-    .anticon,
-    .trigger {
-      cursor: pointer;
-      font-size: 14px;
+
+  .v-handler {
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    border-bottom: 1px solid #d8d8d8;
+
+    .ant-btn {
+      color: #aaa;
+      span {
+        margin-left: 2px;
+      }
       &:hover {
         color: #1890ff;
       }
     }
-    .ant-card {
-      .trigger {
-        padding: 10px;
-        margin: 0 -10px;
-      }
-      .ant-card-head {
-        padding: 0 18px;
-        margin-bottom: 0;
-      }
-      .ant-card-body {
-        height: calc(~'100vh - 122px');
-        overflow-x: hidden;
-        overflow-y: overlay;
-        padding: 0;
-      }
-      .unit-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        li {
-          width: 46%;
-          padding: 10px;
-          text-align: center;
-          background: #f7f8fa;
-          border-radius: 2px;
-          transition: all 0.4s;
-          &:hover {
-            background: #1890ff;
-            color: #fff;
-            cursor: e-resize;
-            .anticon {
-              color: #fff;
-              cursor: e-resize;
-            }
-          }
-          .anticon {
-            font-size: 24px;
-            color: #1890ff;
-            transition: all 0.4s;
-          }
-          p {
-            margin: 0;
-          }
-        }
-      }
-    }
-    .ant-collapse {
-      border: 0;
-      min-width: 200px;
-      .ant-collapse-item,
-      .ant-collapse-content {
-        border-color: #f0f0f0;
-        .ant-collapse-content-box {
-          padding: 16px 5px;
-        }
-      }
+  }
+  .v-menu {
+    background: transparent;
+    border-right: 1px solid #d8d8d8;
+    .ant-layout-sider-children {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .ant-menu {
-      border-right: 0;
+      background: transparent;
       .ant-menu-item {
-        width: 100%;
-        padding: 0 !important;
-        text-align: center;
-      }
-    }
-  }
-  .v-editor {
-    width: 25%;
-    min-width: 360px;
-    background: #fff;
-  }
-  .v-container {
-    position: relative;
-  }
-  .v-girds {
-    padding: 10px;
-    background: #fff;
-    .ant-col {
-      padding: 2px;
-    }
-    .mod-columns {
-      .mod-main {
-        min-height: 150px;
-        border: 0.5px dotted #d8d8d8;
-        transition: all 0.3s;
-        &:hover {
-          border: 0.5px dashed rgb(117, 177, 255);
+        margin: 0;
+        .ant-icon {
+          color: #888;
         }
       }
     }
   }
-  .v-handler {
-    position: absolute;
-    top: -42px;
-    left: 15px;
-    right: 15px;
-    display: flex;
-    justify-content: center;
+  .v-units {
+    border-right: 1px solid #d8d8d8;
+    .ant-card-small > .ant-card-body {
+      padding: 0;
+    }
+    .ant-collapse {
+      border-width: 1px 0;
+    }
+  }
+  .v-container {
+    background: #fff;
+  }
+  .v-path {
+    height: 28px;
+    line-height: 28px;
+    padding: 0;
+    border-top: 1px solid #d8d8d8;
+  }
+  .v-editor {
+    border-left: 1px solid #d8d8d8;
+    background: #fff;
   }
 }
