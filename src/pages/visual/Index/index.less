@@ -73,6 +73,9 @@
       .ant-collapse-item,
       .ant-collapse-content {
         border-color: #f0f0f0;
+        .ant-collapse-content-box {
+          padding: 16px 5px;
+        }
       }
     }
     .ant-menu {
@@ -88,5 +91,33 @@
     width: 25%;
     min-width: 360px;
     background: #fff;
+  }
+  .v-container {
+    position: relative;
+  }
+  .v-girds {
+    padding: 10px;
+    background: #fff;
+    .ant-col {
+      padding: 2px;
+    }
+    .mod-columns {
+      .mod-main {
+        min-height: 150px;
+        border: 0.5px dotted #d8d8d8;
+        transition: all 0.3s;
+        &:hover {
+          border: 0.5px dashed rgb(117, 177, 255);
+        }
+      }
+    }
+  }
+  .v-handler {
+    position: absolute;
+    top: -42px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: center;
   }
 }

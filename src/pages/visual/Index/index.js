@@ -1,7 +1,7 @@
 import {memo, useState, useEffect, useRef} from 'react';
 import {Layout, Card} from 'antd';
 
-import {VisualUnits, VisualGirds, VisualEditor} from '@/components/visual';
+import {VisualHandler, VisualUnits, VisualGirds, VisualEditor} from '@/components/visual';
 import logo from '@/assets/images/logo.png';
 import './index.less';
 
@@ -114,6 +114,7 @@ const Template = () => {
           <VisualUnits collapsed={collapsed} callbackCollapse={setCollapsed} />
           {/* 栅格区域 */}
           <Content className="v-container">
+            <VisualHandler />
             <VisualGirds collapsed={collapsed} data={data} />
           </Content>
           {/* 编辑区 */}

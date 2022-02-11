@@ -47,7 +47,7 @@ export const gridDefaults = {
   breakpoints: {lg: 600},
   cols: {lg: 12},
   // rowHeight = Math.floor(window.innerHeight / 3),
-  rowHeight: 100,
+  rowHeight: 150,
   margin: [5, 5],
   containerPadding: [0, 0],
   droppingItem: {

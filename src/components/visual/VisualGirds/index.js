@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Responsive as ResponsiveGridLayout} from 'react-grid-layout';
 import _ from 'lodash';
+import {CloseOutlined} from '@ant-design/icons';
 
 import {siderWidth, siderCollapsedWidth, gridDefaults} from '../config';
 
@@ -88,13 +89,12 @@ const Template = (props) => {
     console.log('dataCol', dataColumns);
     return dataColumns.map(({id, layouts}) => {
       const {i, w, h, x, y} = layouts;
-      console.log('id', id);
       return (
-        <div key={`${i}_${w}_${h}_${x}_${y}`} data-grid={layouts}>
+        <div key={`${i}`} data-grid={layouts}>
           <span className="text">{id}</span>
-          {/* <span className="remove" style={styleBtnRemove} onClick={() => onRemoveItem(i)}>
-                x
-              </span> */}
+          <span className="remove" style={styleBtnRemove} onClick={() => onRemoveItem(i)}>
+            <CloseOutlined />
+          </span>
         </div>
       );
     });
@@ -117,4 +117,4 @@ const Template = (props) => {
   );
 };
 
-export default Template;
+export default React.memo(Template);
